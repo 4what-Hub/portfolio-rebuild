@@ -5,7 +5,6 @@ import { getAuth, Auth } from 'firebase/auth';
 import { getAnalytics, Analytics, isSupported } from 'firebase/analytics';
 
 // Firebase configuration
-// Replace these values with your Firebase project configuration
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -16,14 +15,28 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
+// Check if Firebase config is available
+function isFirebaseConfigured(): boolean {
+  return !!(
+    firebaseConfig.apiKey &&
+    firebaseConfig.projectId &&
+    firebaseConfig.appId
+  );
+}
+
 // Initialize Firebase app (singleton pattern)
-let app: FirebaseApp;
-let db: Firestore;
-let storage: FirebaseStorage;
-let auth: Auth;
+let app: FirebaseApp | null = null;
+let db: Firestore | null = null;
+let storage: FirebaseStorage | null = null;
+let auth: Auth | null = null;
 let analytics: Analytics | null = null;
 
-function initializeFirebase(): FirebaseApp {
+function initializeFirebase(): FirebaseApp | null {
+  if (!isFirebaseConfigured()) {
+    console.warn('Firebase config not found. Set NEXT_PUBLIC_FIREBASE_* environment variables.');
+    return null;
+  }
+
   if (getApps().length === 0) {
     app = initializeApp(firebaseConfig);
   } else {
@@ -33,7 +46,7 @@ function initializeFirebase(): FirebaseApp {
 }
 
 // Get Firebase app instance
-export function getFirebaseApp(): FirebaseApp {
+export function getFirebaseApp(): FirebaseApp | null {
   if (!app) {
     app = initializeFirebase();
   }
@@ -41,25 +54,34 @@ export function getFirebaseApp(): FirebaseApp {
 }
 
 // Get Firestore instance
-export function getFirestoreDb(): Firestore {
+export function getFirestoreDb(): Firestore | null {
   if (!db) {
-    db = getFirestore(getFirebaseApp());
+    const firebaseApp = getFirebaseApp();
+    if (firebaseApp) {
+      db = getFirestore(firebaseApp);
+    }
   }
   return db;
 }
 
 // Get Storage instance
-export function getFirebaseStorage(): FirebaseStorage {
+export function getFirebaseStorage(): FirebaseStorage | null {
   if (!storage) {
-    storage = getStorage(getFirebaseApp());
+    const firebaseApp = getFirebaseApp();
+    if (firebaseApp) {
+      storage = getStorage(firebaseApp);
+    }
   }
   return storage;
 }
 
 // Get Auth instance
-export function getFirebaseAuth(): Auth {
+export function getFirebaseAuth(): Auth | null {
   if (!auth) {
-    auth = getAuth(getFirebaseApp());
+    const firebaseApp = getFirebaseApp();
+    if (firebaseApp) {
+      auth = getAuth(firebaseApp);
+    }
   }
   return auth;
 }
@@ -71,13 +93,19 @@ export async function getFirebaseAnalytics(): Promise<Analytics | null> {
   }
 
   if (!analytics) {
-    const supported = await isSupported();
-    if (supported) {
-      analytics = getAnalytics(getFirebaseApp());
+    const firebaseApp = getFirebaseApp();
+    if (firebaseApp) {
+      const supported = await isSupported();
+      if (supported) {
+        analytics = getAnalytics(firebaseApp);
+      }
     }
   }
   return analytics;
 }
+
+// Export check function
+export { isFirebaseConfigured };
 
 // Export initialized instances for convenience
 export { app, db, storage, auth, analytics };

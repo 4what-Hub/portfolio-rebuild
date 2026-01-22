@@ -7,10 +7,18 @@ import {
   listAll,
   UploadTask,
   UploadTaskSnapshot,
+  FirebaseStorage,
 } from 'firebase/storage';
 import { getFirebaseStorage } from './config';
 
-const storage = getFirebaseStorage();
+// Helper to get storage with error handling
+function getStorage(): FirebaseStorage {
+  const storage = getFirebaseStorage();
+  if (!storage) {
+    throw new Error('Firebase is not configured. Please set up environment variables.');
+  }
+  return storage;
+}
 
 // Storage paths
 export const STORAGE_PATHS = {
@@ -50,7 +58,7 @@ export async function uploadFile(
     ? `${folder}/${subfolder}/${finalFileName}`
     : `${folder}/${finalFileName}`;
 
-  const storageRef = ref(storage, path);
+  const storageRef = ref(getStorage(), path);
 
   // Upload the file
   await uploadBytes(storageRef, file);
@@ -77,7 +85,7 @@ export function uploadFileWithProgress(
     ? `${folder}/${subfolder}/${finalFileName}`
     : `${folder}/${finalFileName}`;
 
-  const storageRef = ref(storage, path);
+  const storageRef = ref(getStorage(), path);
   const task = uploadBytesResumable(storageRef, file);
 
   const promise = new Promise<string>((resolve, reject) => {
@@ -120,7 +128,7 @@ export async function uploadMultipleFiles(
  */
 export async function deleteFileByUrl(url: string): Promise<void> {
   try {
-    const storageRef = ref(storage, url);
+    const storageRef = ref(getStorage(), url);
     await deleteObject(storageRef);
   } catch (error) {
     // File might not exist, log but don't throw
@@ -132,7 +140,7 @@ export async function deleteFileByUrl(url: string): Promise<void> {
  * Delete a file by its path
  */
 export async function deleteFileByPath(path: string): Promise<void> {
-  const storageRef = ref(storage, path);
+  const storageRef = ref(getStorage(), path);
   await deleteObject(storageRef);
 }
 
@@ -156,7 +164,7 @@ export async function listFiles(
   subfolder?: string
 ): Promise<{ name: string; url: string }[]> {
   const path = subfolder ? `${folder}/${subfolder}` : folder;
-  const listRef = ref(storage, path);
+  const listRef = ref(getStorage(), path);
 
   const result = await listAll(listRef);
 
@@ -178,7 +186,7 @@ export async function listFiles(
  * Get the download URL for a file path
  */
 export async function getFileUrl(path: string): Promise<string> {
-  const storageRef = ref(storage, path);
+  const storageRef = ref(getStorage(), path);
   return getDownloadURL(storageRef);
 }
 

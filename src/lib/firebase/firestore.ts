@@ -16,7 +16,7 @@ import {
   serverTimestamp,
   Timestamp,
 } from 'firebase/firestore';
-import { getFirestoreDb, COLLECTIONS, DOC_IDS } from './config';
+import { getFirestoreDb, COLLECTIONS, DOC_IDS, isFirebaseConfigured } from './config';
 import type {
   Project,
   ProjectInput,
@@ -32,7 +32,14 @@ import type {
   SortOptions,
 } from '@/types';
 
-const db = getFirestoreDb();
+// Helper to get db with error handling
+function getDb() {
+  const db = getFirestoreDb();
+  if (!db) {
+    throw new Error('Firebase is not configured. Please set up environment variables.');
+  }
+  return db;
+}
 
 // ========================================
 // Projects
@@ -73,7 +80,7 @@ export async function getProjects(
     constraints.push(startAfter(lastDoc));
   }
 
-  const q = query(collection(db, COLLECTIONS.PROJECTS), ...constraints);
+  const q = query(collection(getDb(), COLLECTIONS.PROJECTS), ...constraints);
   const snapshot = await getDocs(q);
 
   const projects = snapshot.docs.map((doc) => ({
@@ -88,7 +95,7 @@ export async function getProjects(
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
   const q = query(
-    collection(db, COLLECTIONS.PROJECTS),
+    collection(getDb(), COLLECTIONS.PROJECTS),
     where('slug', '==', slug),
     where('status', '==', 'published'),
     limit(1)
@@ -104,7 +111,7 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
 }
 
 export async function getProjectById(id: string): Promise<Project | null> {
-  const docRef = doc(db, COLLECTIONS.PROJECTS, id);
+  const docRef = doc(getDb(), COLLECTIONS.PROJECTS, id);
   const snapshot = await getDoc(docRef);
 
   if (!snapshot.exists()) {
@@ -116,7 +123,7 @@ export async function getProjectById(id: string): Promise<Project | null> {
 
 export async function getFeaturedProjects(count: number = 4): Promise<Project[]> {
   const q = query(
-    collection(db, COLLECTIONS.PROJECTS),
+    collection(getDb(), COLLECTIONS.PROJECTS),
     where('featured', '==', true),
     where('status', '==', 'published'),
     orderBy('displayOrder', 'asc'),
@@ -131,7 +138,7 @@ export async function getFeaturedProjects(count: number = 4): Promise<Project[]>
 }
 
 export async function createProject(data: ProjectInput): Promise<string> {
-  const docRef = await addDoc(collection(db, COLLECTIONS.PROJECTS), {
+  const docRef = await addDoc(collection(getDb(), COLLECTIONS.PROJECTS), {
     ...data,
     createdAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
@@ -140,7 +147,7 @@ export async function createProject(data: ProjectInput): Promise<string> {
 }
 
 export async function updateProject(id: string, data: Partial<ProjectInput>): Promise<void> {
-  const docRef = doc(db, COLLECTIONS.PROJECTS, id);
+  const docRef = doc(getDb(), COLLECTIONS.PROJECTS, id);
   await updateDoc(docRef, {
     ...data,
     updatedAt: serverTimestamp(),
@@ -148,7 +155,7 @@ export async function updateProject(id: string, data: Partial<ProjectInput>): Pr
 }
 
 export async function deleteProject(id: string): Promise<void> {
-  const docRef = doc(db, COLLECTIONS.PROJECTS, id);
+  const docRef = doc(getDb(), COLLECTIONS.PROJECTS, id);
   await deleteDoc(docRef);
 }
 
@@ -177,7 +184,7 @@ export async function getGalleryItems(
     constraints.push(startAfter(lastDoc));
   }
 
-  const q = query(collection(db, COLLECTIONS.GALLERY), ...constraints);
+  const q = query(collection(getDb(), COLLECTIONS.GALLERY), ...constraints);
   const snapshot = await getDocs(q);
 
   const items = snapshot.docs.map((doc) => ({
@@ -191,7 +198,7 @@ export async function getGalleryItems(
 }
 
 export async function getGalleryItemById(id: string): Promise<GalleryItem | null> {
-  const docRef = doc(db, COLLECTIONS.GALLERY, id);
+  const docRef = doc(getDb(), COLLECTIONS.GALLERY, id);
   const snapshot = await getDoc(docRef);
 
   if (!snapshot.exists()) {
@@ -202,7 +209,7 @@ export async function getGalleryItemById(id: string): Promise<GalleryItem | null
 }
 
 export async function createGalleryItem(data: GalleryItemInput): Promise<string> {
-  const docRef = await addDoc(collection(db, COLLECTIONS.GALLERY), {
+  const docRef = await addDoc(collection(getDb(), COLLECTIONS.GALLERY), {
     ...data,
     createdAt: serverTimestamp(),
   });
@@ -210,12 +217,12 @@ export async function createGalleryItem(data: GalleryItemInput): Promise<string>
 }
 
 export async function updateGalleryItem(id: string, data: Partial<GalleryItemInput>): Promise<void> {
-  const docRef = doc(db, COLLECTIONS.GALLERY, id);
+  const docRef = doc(getDb(), COLLECTIONS.GALLERY, id);
   await updateDoc(docRef, data);
 }
 
 export async function deleteGalleryItem(id: string): Promise<void> {
-  const docRef = doc(db, COLLECTIONS.GALLERY, id);
+  const docRef = doc(getDb(), COLLECTIONS.GALLERY, id);
   await deleteDoc(docRef);
 }
 
@@ -224,7 +231,7 @@ export async function deleteGalleryItem(id: string): Promise<void> {
 // ========================================
 
 export async function getSiteConfig(): Promise<SiteConfig | null> {
-  const docRef = doc(db, COLLECTIONS.SITE_CONFIG, DOC_IDS.SITE_CONFIG);
+  const docRef = doc(getDb(), COLLECTIONS.SITE_CONFIG, DOC_IDS.SITE_CONFIG);
   const snapshot = await getDoc(docRef);
 
   if (!snapshot.exists()) {
@@ -235,7 +242,7 @@ export async function getSiteConfig(): Promise<SiteConfig | null> {
 }
 
 export async function updateSiteConfig(data: Partial<SiteConfig>): Promise<void> {
-  const docRef = doc(db, COLLECTIONS.SITE_CONFIG, DOC_IDS.SITE_CONFIG);
+  const docRef = doc(getDb(), COLLECTIONS.SITE_CONFIG, DOC_IDS.SITE_CONFIG);
   await updateDoc(docRef, {
     ...data,
     updatedAt: serverTimestamp(),
@@ -247,7 +254,7 @@ export async function updateSiteConfig(data: Partial<SiteConfig>): Promise<void>
 // ========================================
 
 export async function getAboutContent(): Promise<AboutContent | null> {
-  const docRef = doc(db, COLLECTIONS.ABOUT, DOC_IDS.ABOUT);
+  const docRef = doc(getDb(), COLLECTIONS.ABOUT, DOC_IDS.ABOUT);
   const snapshot = await getDoc(docRef);
 
   if (!snapshot.exists()) {
@@ -258,7 +265,7 @@ export async function getAboutContent(): Promise<AboutContent | null> {
 }
 
 export async function updateAboutContent(data: Partial<AboutContent>): Promise<void> {
-  const docRef = doc(db, COLLECTIONS.ABOUT, DOC_IDS.ABOUT);
+  const docRef = doc(getDb(), COLLECTIONS.ABOUT, DOC_IDS.ABOUT);
   await updateDoc(docRef, {
     ...data,
     updatedAt: serverTimestamp(),
@@ -270,7 +277,7 @@ export async function updateAboutContent(data: Partial<AboutContent>): Promise<v
 // ========================================
 
 export async function submitContactForm(data: ContactFormData): Promise<string> {
-  const docRef = await addDoc(collection(db, COLLECTIONS.CONTACT_SUBMISSIONS), {
+  const docRef = await addDoc(collection(getDb(), COLLECTIONS.CONTACT_SUBMISSIONS), {
     ...data,
     read: false,
     archived: false,
@@ -297,7 +304,7 @@ export async function getContactSubmissions(
     constraints.push(startAfter(lastDoc));
   }
 
-  const q = query(collection(db, COLLECTIONS.CONTACT_SUBMISSIONS), ...constraints);
+  const q = query(collection(getDb(), COLLECTIONS.CONTACT_SUBMISSIONS), ...constraints);
   const snapshot = await getDocs(q);
 
   const submissions = snapshot.docs.map((doc) => ({
@@ -311,12 +318,12 @@ export async function getContactSubmissions(
 }
 
 export async function markSubmissionAsRead(id: string): Promise<void> {
-  const docRef = doc(db, COLLECTIONS.CONTACT_SUBMISSIONS, id);
+  const docRef = doc(getDb(), COLLECTIONS.CONTACT_SUBMISSIONS, id);
   await updateDoc(docRef, { read: true });
 }
 
 export async function archiveSubmission(id: string): Promise<void> {
-  const docRef = doc(db, COLLECTIONS.CONTACT_SUBMISSIONS, id);
+  const docRef = doc(getDb(), COLLECTIONS.CONTACT_SUBMISSIONS, id);
   await updateDoc(docRef, { archived: true });
 }
 
@@ -330,7 +337,7 @@ export async function subscribeToNewsletter(
 ): Promise<string> {
   // Check if already subscribed
   const q = query(
-    collection(db, COLLECTIONS.NEWSLETTER),
+    collection(getDb(), COLLECTIONS.NEWSLETTER),
     where('email', '==', email),
     limit(1)
   );
@@ -340,7 +347,7 @@ export async function subscribeToNewsletter(
     const existingDoc = existing.docs[0];
     // Reactivate if previously unsubscribed
     if (!existingDoc.data().active) {
-      await updateDoc(doc(db, COLLECTIONS.NEWSLETTER, existingDoc.id), {
+      await updateDoc(doc(getDb(), COLLECTIONS.NEWSLETTER, existingDoc.id), {
         active: true,
         subscribedAt: serverTimestamp(),
         unsubscribedAt: null,
@@ -349,7 +356,7 @@ export async function subscribeToNewsletter(
     return existingDoc.id;
   }
 
-  const docRef = await addDoc(collection(db, COLLECTIONS.NEWSLETTER), {
+  const docRef = await addDoc(collection(getDb(), COLLECTIONS.NEWSLETTER), {
     email,
     source,
     active: true,
@@ -360,14 +367,14 @@ export async function subscribeToNewsletter(
 
 export async function unsubscribeFromNewsletter(email: string): Promise<void> {
   const q = query(
-    collection(db, COLLECTIONS.NEWSLETTER),
+    collection(getDb(), COLLECTIONS.NEWSLETTER),
     where('email', '==', email),
     limit(1)
   );
   const snapshot = await getDocs(q);
 
   if (!snapshot.empty) {
-    const docRef = doc(db, COLLECTIONS.NEWSLETTER, snapshot.docs[0].id);
+    const docRef = doc(getDb(), COLLECTIONS.NEWSLETTER, snapshot.docs[0].id);
     await updateDoc(docRef, {
       active: false,
       unsubscribedAt: serverTimestamp(),

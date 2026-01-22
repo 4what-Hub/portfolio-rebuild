@@ -4,10 +4,18 @@ import {
   onAuthStateChanged,
   User,
   UserCredential,
+  Auth,
 } from 'firebase/auth';
 import { getFirebaseAuth } from './config';
 
-const auth = getFirebaseAuth();
+// Helper to get auth with error handling
+function getAuth(): Auth {
+  const auth = getFirebaseAuth();
+  if (!auth) {
+    throw new Error('Firebase is not configured. Please set up environment variables.');
+  }
+  return auth;
+}
 
 // ========================================
 // Authentication Functions
@@ -17,27 +25,34 @@ const auth = getFirebaseAuth();
  * Sign in with email and password
  */
 export async function signIn(email: string, password: string): Promise<UserCredential> {
-  return signInWithEmailAndPassword(auth, email, password);
+  return signInWithEmailAndPassword(getAuth(), email, password);
 }
 
 /**
  * Sign out the current user
  */
 export async function signOut(): Promise<void> {
-  return firebaseSignOut(auth);
+  return firebaseSignOut(getAuth());
 }
 
 /**
  * Get the current user
  */
 export function getCurrentUser(): User | null {
-  return auth.currentUser;
+  const auth = getFirebaseAuth();
+  return auth?.currentUser ?? null;
 }
 
 /**
  * Subscribe to auth state changes
  */
 export function onAuthChange(callback: (user: User | null) => void): () => void {
+  const auth = getFirebaseAuth();
+  if (!auth) {
+    // Return a no-op unsubscribe function
+    console.warn('Firebase Auth not configured');
+    return () => {};
+  }
   return onAuthStateChanged(auth, callback);
 }
 
@@ -45,7 +60,8 @@ export function onAuthChange(callback: (user: User | null) => void): () => void 
  * Check if user is authenticated
  */
 export function isAuthenticated(): boolean {
-  return auth.currentUser !== null;
+  const auth = getFirebaseAuth();
+  return auth?.currentUser !== null && auth?.currentUser !== undefined;
 }
 
 /**
@@ -53,6 +69,11 @@ export function isAuthenticated(): boolean {
  */
 export function waitForAuth(): Promise<User | null> {
   return new Promise((resolve) => {
+    const auth = getFirebaseAuth();
+    if (!auth) {
+      resolve(null);
+      return;
+    }
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       unsubscribe();
       resolve(user);
