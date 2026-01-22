@@ -11,31 +11,37 @@ export const metadata: Metadata = {
 
 // About content - will be replaced with Firestore data
 const aboutContent = {
-  heroTitle: 'A perfectly ordinary name...',
+  heroTitle: 'a perfectly ordinary name...',
   heroSubtitle: 'that speaks to a most extraordinary journey...',
   sections: [
     {
       id: 'intro',
       title: 'The Beginning',
-      content: `I was born in 2003, in the main city of Mpumalanga - Mbombela. From a young age, I found myself drawn to art and storytelling, spending countless hours sketching characters and imagining worlds beyond my own.`,
-      image: '/images/about-1.jpg',
-      imageAlt: 'Young Iwan sketching',
+      content: `I was born in 2003, in the main city of Mpumalanga - Mbombela (formerly known as Nelspruit). Some of my earlier formative years were spent there, in the Lowveld - amidst the giant stick insects, African snails and plentiful wildlife. To my young eyes, these sights were more than enough to excite my most wild imaginations and quickened my thirsts for adventure at the young age of three.
+
+Around 2006, me and my incredible family relocated to Bloemfontein, in the Free State. Though our new home stood in stark contrast to my birthland, I still carried something of my love for the strange and the wonderful. This passion gave birth to endless rants about far-away worlds (which my mother eagerly endured), fantastical characters, creatures and too many pocket-sized sketches to count.`,
+      image: '/images/PHOTO-2025-11-18-19-31-38.jpg',
+      imageAlt: 'Early years',
       alignment: 'right' as const,
     },
     {
       id: 'growth',
       title: 'Finding My Path',
-      content: `As I grew in confidence and prowess, my artistic pursuits evolved from simple sketches to complex character designs. I discovered 3D animation and knew immediately that this was where I belonged - bringing characters to life in ways that traditional art never could.`,
-      image: '/images/about-2.jpg',
-      imageAlt: 'Working on 3D projects',
+      content: `As I grew in confidence and prowess, so did the scope of my artistic pursuits; throughout the course of high-school, I explored poetry, public speaking, the fine and dramatic arts and music theory. My varied range of creative expression culminated in my decision to pursue a field of study that combines all - if not, most - of these: Animation.
+
+After Matriculating with distinction and a roll of accolades behind my name, I returned to the mountains for the first time in 15 years. I spent my first year outside of High School at Timothy Ministry Training, in the picturesque mountains of the Western Cape.`,
+      image: '/images/PHOTO-2025-11-18-19-31-39.jpg',
+      imageAlt: 'High school and gap year',
       alignment: 'left' as const,
     },
     {
       id: 'present',
-      title: 'Simply Beautiful',
-      content: `Today, my work is guided by a simple philosophy: finding beauty in the ordinary. Whether it's the weathered face of a character or the warm glow of a South African sunset, I believe that the most powerful art comes from authentic moments and genuine emotion.`,
-      image: '/images/about-3.jpg',
-      imageAlt: 'Current work',
+      title: 'The Animation School',
+      content: `During my gap year, I was forced away from traditional media and became versed in using a digital drawing tablet. After a year of relearning how to draw, I applied for a 3 year Diploma Course at The Animation School and was accepted.
+
+Today, my work is guided by a simple philosophy: finding beauty in the ordinary. Whether it's the weathered face of a character or the warm glow of a South African sunset, I believe that the most powerful art comes from authentic moments and genuine emotion.`,
+      image: '/images/PHOTO-2025-11-18-19-31-37.jpg',
+      imageAlt: 'Animation school journey',
       alignment: 'right' as const,
     },
   ],
@@ -85,10 +91,13 @@ export default function AboutPage() {
                 className={`relative ${section.alignment === 'left' ? 'lg:order-1' : ''}`}
               >
                 <div className="aspect-[4/5] rounded-[var(--radius-lg)] overflow-hidden bg-[var(--bg-secondary)]">
-                  <div className="w-full h-full flex items-center justify-center text-[var(--text-secondary)]">
-                    {/* Placeholder - replace with actual images */}
-                    <span>Image: {section.imageAlt}</span>
-                  </div>
+                  <Image
+                    src={section.image}
+                    alt={section.imageAlt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
                 </div>
               </div>
             </div>

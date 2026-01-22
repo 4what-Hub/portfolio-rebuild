@@ -9,25 +9,52 @@ import { cn } from '@/lib/utils/helpers';
 
 // Gallery items - will be replaced with Firestore data
 const galleryItems = [
-  { id: '1', title: 'For Hano', category: 'character-art', image: '/images/For-Hano.jpg' },
+  // Personal/Portrait Work
+  { id: '1', title: 'For Hano', category: 'personal-work', image: '/images/For-Hano.jpg' },
   { id: '2', title: 'Michael Picture', category: 'personal-work', image: '/images/Michael_Picture.jpg' },
-  { id: '3', title: 'Matias Woord', category: 'finished-pieces', image: '/images/Matias_Woord.webp' },
-  { id: '4', title: 'Wian Woord Final', category: 'character-art', image: '/images/Wian_WoordFinal.jpg' },
-  { id: '5', title: 'Sunette Doodle', category: 'sketches', image: '/images/Sunette_Doodle.jpg' },
-  { id: '6', title: 'Hansie Front', category: 'character-art', image: '/images/Hansie_Front_Render.png' },
-  { id: '7', title: 'Johan Hagen Bust', category: 'character-art', image: '/images/Johan_Hagen_Bust_Still-1.png' },
-  { id: '8', title: 'Lantern Presentation', category: 'finished-pieces', image: '/images/Lantern_Presentation_1_View.png' },
-  { id: '9', title: 'Coal Stove', category: 'finished-pieces', image: '/images/CoalStove_Presentation_V01_1.png' },
-  { id: '10', title: 'Early Concept Exploration', category: 'concept-art', image: '/images/Early_Concept_Exploration.jpg' },
+  { id: '3', title: 'Matias Woord', category: 'personal-work', image: '/images/Matias_Woord.webp' },
+  { id: '4', title: 'Wian Woord Final', category: 'personal-work', image: '/images/Wian_WoordFinal.jpg' },
+  { id: '5', title: 'Tannie Ella Woord', category: 'personal-work', image: '/images/Tannie_Ella_Woord.jpg' },
+  { id: '6', title: 'Sunette Doodle', category: 'sketches', image: '/images/Sunette_Doodle.jpg' },
+
+  // Character Art
+  { id: '7', title: 'Hansie Front Render', category: 'character-art', image: '/images/Hansie_Front_Render.png' },
+  { id: '8', title: 'Hansie Back Render', category: 'character-art', image: '/images/Hansie_34Back_Render.png' },
+  { id: '9', title: 'Hansie Bust', category: 'character-art', image: '/images/Hansie_Bust_34Front_Render-1.png' },
+  { id: '10', title: 'Johan Hagen Bust', category: 'character-art', image: '/images/Johan_Hagen_Bust_Still-1.png' },
+  { id: '11', title: 'Character Turntable 1', category: 'character-art', image: '/images/Character_Study_RenderingTurntable01.png' },
+  { id: '12', title: 'Character Turntable 2', category: 'character-art', image: '/images/Character_Study_RenderingTurntable02.png' },
+
+  // Concept Art
+  { id: '13', title: 'Early Concept Exploration', category: 'concept-art', image: '/images/Early_Concept_Exploration.jpg' },
+  { id: '14', title: 'Environment Concept 1', category: 'concept-art', image: '/images/EL_Concept_Exploration01.jpg' },
+  { id: '15', title: 'Environment Concept 2', category: 'concept-art', image: '/images/EL_Concept_Exploration04.jpg' },
+  { id: '16', title: 'Festival Submission 1', category: 'concept-art', image: '/images/Festival_Submission_Page01_TestV02.jpg' },
+  { id: '17', title: 'Festival Submission 2', category: 'concept-art', image: '/images/Festival_Submission_Page02.jpg' },
+
+  // Props & Finished Pieces
+  { id: '18', title: 'Lantern Presentation', category: 'finished-pieces', image: '/images/Lantern_Presentation_1_View.png' },
+  { id: '19', title: 'Coal Stove', category: 'finished-pieces', image: '/images/CoalStove_Presentation_V01_1.png' },
+  { id: '20', title: 'Whipshot Rifle', category: 'finished-pieces', image: '/images/WhipshotRifle_V01_Staged_Adj_1.png' },
+  { id: '21', title: 'Tools Staged', category: 'finished-pieces', image: '/images/Tools_StagedV03_1.png' },
+  { id: '22', title: 'Tools Render', category: 'finished-pieces', image: '/images/Tools_Staged_1.png' },
+  { id: '23', title: 'Rifle Progress', category: 'finished-pieces', image: '/images/WhipshotRifle_Mark01_Progress_Staged_1.png' },
+
+  // Renders & Dioramas
+  { id: '24', title: 'Diorama Blocking', category: 'renders', image: '/images/Diorama_Blocking_Scrap_Setup_1.png' },
+  { id: '25', title: 'Maya Raw Render', category: 'renders', image: '/images/Maya_RawRender.jpg' },
+  { id: '26', title: 'Lighting Key Diorama', category: 'renders', image: '/images/Lighting-Key-Diorama.jpg' },
+  { id: '27', title: 'Rifle Wireframe', category: 'renders', image: '/images/Whipshot_Rifle_StudioSetup_Wireframe_0001.png' },
 ];
 
 const categories = [
   { id: 'all', label: 'All Work' },
   { id: 'character-art', label: 'Character Art' },
   { id: 'concept-art', label: 'Concept Art' },
-  { id: 'finished-pieces', label: 'Finished Pieces' },
-  { id: 'sketches', label: 'Sketches' },
+  { id: 'finished-pieces', label: 'Props & Objects' },
+  { id: 'renders', label: 'Renders & Dioramas' },
   { id: 'personal-work', label: 'Personal Work' },
+  { id: 'sketches', label: 'Sketches' },
 ];
 
 export default function GalleryPage() {

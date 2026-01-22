@@ -24,39 +24,51 @@ const projectsData: Record<string, {
     title: 'Frieda en Rus',
     slug: 'frieda-en-rus',
     tagline: 'Saddle up for style.',
-    fullDescription: `Set in the barren wastelands of the post-post-apocalyptic Free State, Frieda en Rus is a powerful short-form narrative exploring themes of survival, identity, and the enduring spirit of South African culture.
+    fullDescription: `Set in the barren wastelands of the post-post-apocalyptic Free State, Frieda en Rus is a powerful short-form narrative that touches on themes of family, forgiveness and heritage. Since its original conception in my second year of study at The Animation School, this story and its world has grown to become so much more than just another assessment.
 
-The project began as a character study but evolved into a fully realized world with its own history, culture, and visual language. Drawing inspiration from classic westerns and Afrikaans folklore, the Nieu-Transvaal represents a future that feels both alien and deeply familiar.
+This project is my means of cultural expression, drawing strongly from a rich South-African ancestry dating back to 1724. As my individual and creative journeys unfold, Frieda en Rus will continue to be the mirror in which I gaze to ponder on self, my history and my future in this beautiful country.
 
-Every element, from the weathered textures of the characters' clothing to the harsh beauty of the landscape, was designed to tell a story of resilience and adaptation.`,
+Bring your stories to life with bold, western-inspired animation and a fine art twist. Every frame is a showstopper. From textured brushwork to dynamic lighting, each project is packed with personality and a dash of cowboy charm.`,
     category: 'animation',
-    heroImage: '/images/Hansie_Front_Render.png',
+    heroImage: '/images/Diorama_Blocking_Scrap_Setup_1.png',
     images: [
       { url: '/images/Early_Concept_Exploration.jpg', alt: 'Early concept exploration', type: 'concept' },
-      { url: '/images/Hansie_Front_Render.png', alt: 'Hansie character front view', type: 'character' },
+      { url: '/images/EL_Concept_Exploration01.jpg', alt: 'Environment concept', type: 'concept' },
+      { url: '/images/EL_Concept_Exploration04.jpg', alt: 'Character concept', type: 'concept' },
+      { url: '/images/Festival_Submission_Page01_TestV02.jpg', alt: 'Festival submission', type: 'presentation' },
+      { url: '/images/WhipshotRifle_V01_Staged_Adj_1.png', alt: 'Whipshot rifle render', type: 'prop' },
+      { url: '/images/Whipshot_Rifle_StudioSetup_Wireframe_0001.png', alt: 'Rifle wireframe', type: 'wireframe' },
+      { url: '/images/Tools_StagedV03_1.png', alt: 'Tools staged render', type: 'prop' },
+      { url: '/images/Tools_Staged_1.png', alt: 'Tools render', type: 'prop' },
+      { url: '/images/Lantern_Presentation_1_View.png', alt: 'Lantern presentation', type: 'prop' },
+      { url: '/images/CoalStove_Presentation_V01_1.png', alt: 'Coal stove presentation', type: 'prop' },
     ],
     metadata: {
       technologies: ['Maya', 'ZBrush', 'Substance Painter', 'Arnold'],
-      duration: '10 months',
+      duration: 'Ongoing since 2023',
     },
   },
   'braai': {
     title: 'Nou Gaan Ons Braai',
     slug: 'braai',
     tagline: 'A classic South African phrase.',
-    fullDescription: `"Nou Gaan Ons Braai" - a phrase that resonates with every South African. This project celebrates the rich cultural tradition of the braai, transforming this beloved pastime into a visual narrative.
+    fullDescription: `Tasked with designing and populating a 3-D diorama with an original character as its centerpiece, I created Hansie - the son of an esteemed professor, itching to exchange the confines of his dormitory for the open field.
 
-Through character design and environmental storytelling, the project captures the warmth, community, and sensory experience of gathering around the fire. Each character represents a different facet of South African braai culture, from the confident braai master to the eager helpers.
+The entire scene was staged and lit to evoke the atmosphere of Oldie's Films, capturing an air of adventure and free-spiritedness. For the audio track of Hansie's speech, I made use of a clip from one of Barry Hilton's shows - drawing from the rich pool of existing South-African talent to add a distinctly local feel to the performance.
 
-The color palette draws from the warm oranges of flames, the deep browns of braaied meat, and the cool evening sky of a typical South African sunset.`,
+The four words every South African loves to hear...`,
     category: 'character-design',
-    heroImage: '/images/CoalStove_Presentation_V01_1.png',
+    heroImage: '/images/Hansie_Front_Render.png',
     images: [
-      { url: '/images/CoalStove_Presentation_V01_1.png', alt: 'Coal stove presentation', type: 'prop' },
-      { url: '/images/Lantern_Presentation_1_View.png', alt: 'Lantern presentation', type: 'prop' },
+      { url: '/images/Hansie_Front_Render.png', alt: 'Hansie front view', type: 'character' },
+      { url: '/images/Hansie_34Back_Render.png', alt: 'Hansie back view', type: 'character' },
+      { url: '/images/Hansie_Bust_34Front_Render-1.png', alt: 'Hansie bust render', type: 'character' },
+      { url: '/images/Maya_RawRender.jpg', alt: 'Maya raw render', type: 'render' },
+      { url: '/images/Character_Study_RenderingTurntable01.png', alt: 'Character turntable 1', type: 'turntable' },
+      { url: '/images/Character_Study_RenderingTurntable02.png', alt: 'Character turntable 2', type: 'turntable' },
     ],
     metadata: {
-      technologies: ['Maya', 'Substance Painter', 'Photoshop'],
+      technologies: ['Maya', 'Substance Painter', 'Arnold', 'After Effects'],
       duration: '6 months',
     },
   },
@@ -64,15 +76,17 @@ The color palette draws from the warm oranges of flames, the deep browns of braa
     title: 'The Professor',
     slug: 'professor',
     tagline: 'From concept to character.',
-    fullDescription: `Dr. Johann Hagen, known simply as "The Professor," began as a simple sketch and evolved into one of my most detailed character studies.
+    fullDescription: `A student's introduction to digital mastery. This project marked the start of an exciting new chapter in my artistic journey. Concepting, Modeling, Unwrapping, Texturing, Surfacing, Lighting and Compositing - all terms that I had never heard before my first year of study - culminated in this Diorama.
 
-This project documents the complete journey from initial concept to final 3D character, showcasing the iterative process of character development. Each stage reveals new insights into the character's personality, history, and visual identity.
+The task of singlehandedly taking these digital assets through the entire 3-D Pipeline seemed impossible to a novice, only familiar with traditional media. Now, however, the product stands not only as a testimony of my potential as an artist, but to my creative growth over the course of the last three years.
 
-The Professor embodies wisdom tempered by experience, his weathered features telling stories of countless experiments and discoveries. His design balances academic authority with approachable warmth.`,
+Although we were given random traits - both positive and negative - to construct our characters around as part of our assignment brief, Johann Hagen is anything but a haphazard creation. He is a carefully crafted combination of myself, my father and the parts of me I often wish I could get rid of. He is deeply emotive and artistic, studious, incredibly intelligent and brooding - but only when he is completely alone.`,
     category: 'diorama',
     heroImage: '/images/Johan_Hagen_Bust_Still-1.png',
     images: [
-      { url: '/images/Johan_Hagen_Bust_Still-1.png', alt: 'Johan Hagen bust render', type: 'character' },
+      { url: '/images/Johan_Hagen_Bust_Still-1.png', alt: 'Johan Hagen bust', type: 'character' },
+      { url: '/images/Empathetic-1.png', alt: 'Empathetic trait', type: 'concept' },
+      { url: '/images/Lighting-Key-Diorama.jpg', alt: 'Lighting key diorama', type: 'render' },
     ],
     metadata: {
       technologies: ['ZBrush', 'Maya', 'Substance Painter', 'Arnold'],
@@ -83,20 +97,20 @@ The Professor embodies wisdom tempered by experience, his weathered features tel
     title: 'Unexpected Visitors',
     slug: 'unexpected-visitors',
     tagline: "If aliens ever did come to earth they'd come to SA first.",
-    fullDescription: `What if first contact happened not in New York or Tokyo, but in Cape Town? "Unexpected Visitors" explores this premise through a uniquely South African lens.
+    fullDescription: `Thirteen third years. Ten months. Three and a half minutes. One of my greatest successes as a creative, 'Unexpected Visitors' is the culmination of three years of combined study.
 
-The project imagines humanoid visitors arriving in Cape Town, their otherworldly presence contrasted against the iconic backdrop of Table Mountain and the vibrant streets of the Mother City. The designs blend sci-fi aesthetics with local cultural elements.
+This project - almost two years in the making - was a joint creative effort between thirteen final-year students as part of our course. We worked 08:00-17:00 days from early February to November, moving through every part of the 3-D Pipeline - from concepting to compositing.
 
-This collaborative project brought together multiple artists to create a cohesive vision of this alternate reality, each contributing their unique perspective to the shared universe.`,
+When my grandmother asked me what I would do when I was all grown up, I told her that I'd make movies. Seeing my name in a post-credit roll has been a dream 18 years in the making.`,
     category: 'collaborative',
-    heroImage: '/images/Early_Concept_Exploration.jpg',
+    heroImage: '/images/Screenshot-2025-11-18-at-10.34.15.png',
     images: [
-      { url: '/images/Early_Concept_Exploration.jpg', alt: 'Concept exploration', type: 'concept' },
+      { url: '/images/Screenshot-2025-11-18-at-10.34.15.png', alt: 'Film screenshot', type: 'screenshot' },
     ],
     metadata: {
-      technologies: ['Maya', 'ZBrush', 'After Effects'],
-      duration: '8 months',
-      collaborators: ['Team collaboration project'],
+      technologies: ['Maya', 'ZBrush', 'Substance Painter', 'Nuke', 'After Effects'],
+      duration: '10 months',
+      collaborators: ['13 final-year students at The Animation School'],
     },
   },
 };
