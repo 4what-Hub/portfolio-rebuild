@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Container } from '@/components/layout';
 import { Button, Card, CardImage, CardTitle, CardDescription } from '@/components/ui';
+import ProjectCarouselWrapper from '@/components/three/ProjectCarouselWrapper';
 
 // Placeholder data - will be replaced with Firestore data
 const featuredProjects = [
@@ -84,12 +85,27 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Featured Projects Section */}
-      <section className="section bg-[var(--bg-primary)]">
+      {/* 3D Project Carousel Section */}
+      <section className="relative bg-[var(--bg-primary)] overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-secondary)] via-transparent to-[var(--bg-primary)]" />
+        <Container className="relative z-10">
+          <div className="text-center pt-16 pb-8">
+            <p className="eyebrow mb-2">Portfolio</p>
+            <h2 className="text-3xl md:text-4xl font-heading">Explore My Work</h2>
+            <p className="text-[var(--text-secondary)] mt-4 max-w-xl mx-auto">
+              Navigate through my featured projects in 3D. Click and drag to explore.
+            </p>
+          </div>
+        </Container>
+        <ProjectCarouselWrapper projects={featuredProjects} />
+      </section>
+
+      {/* Featured Projects Grid (Accessible fallback) */}
+      <section className="section bg-[var(--bg-secondary)]">
         <Container>
           <div className="text-center mb-12">
-            <p className="eyebrow mb-2">Portfolio</p>
-            <h2 className="text-3xl md:text-4xl font-heading">Featured Projects</h2>
+            <p className="eyebrow mb-2">All Projects</p>
+            <h2 className="text-3xl md:text-4xl font-heading">Featured Work</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
