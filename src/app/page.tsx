@@ -1,65 +1,183 @@
-import Image from "next/image";
+import Link from 'next/link';
+import { Container } from '@/components/layout';
+import { Button, Card, CardImage, CardTitle, CardDescription } from '@/components/ui';
 
-export default function Home() {
+// Placeholder data - will be replaced with Firestore data
+const featuredProjects = [
+  {
+    id: '1',
+    title: 'Frieda en Rus',
+    slug: 'frieda-en-rus',
+    tagline: 'Saddle up for style.',
+    shortDescription: 'A post-post apocalyptic wilderness. Welcome to the Wild West of the Nieu-Transvaal.',
+    image: '/images/frieda-hero.jpg',
+  },
+  {
+    id: '2',
+    title: 'Nou Gaan Ons Braai',
+    slug: 'braai',
+    tagline: 'A classic South African phrase.',
+    shortDescription: 'Celebrating the rich cultural tradition of the South African braai.',
+    image: '/images/braai-hero.jpg',
+  },
+  {
+    id: '3',
+    title: 'The Professor',
+    slug: 'professor',
+    tagline: 'From concept to character.',
+    shortDescription: 'A detailed character study of Dr. Johann Hagen.',
+    image: '/images/professor-hero.jpg',
+  },
+  {
+    id: '4',
+    title: 'Unexpected Visitors',
+    slug: 'unexpected-visitors',
+    tagline: "If aliens ever did come to earth they'd come to SA first.",
+    shortDescription: 'A sci-fi exploration of humanoid visitors in Cape Town.',
+    image: '/images/visitors-hero.jpg',
+  },
+];
+
+export default function HomePage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <>
+      {/* Hero Section */}
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-[var(--bg-secondary)]">
+        {/* Background gradient/animation placeholder */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-secondary)] via-[var(--bg-primary)] to-[var(--bg-secondary)]" />
+
+        {/* Hero Content */}
+        <Container className="relative z-10 text-center">
+          <p className="eyebrow mb-4 animate-fade-in">3D Animation &amp; Character Design</p>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading mb-6 animate-slide-up">
+            Simply Beautiful
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-xl md:text-2xl text-[var(--text-secondary)] max-w-2xl mx-auto mb-8">
+            Finding Beauty in the Ordinary
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button variant="primary" size="lg" asChild>
+              <Link href="/projects">View My Work</Link>
+            </Button>
+            <Button variant="outline" size="lg" asChild>
+              <Link href="/contact">Get in Touch</Link>
+            </Button>
+          </div>
+        </Container>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+          <svg
+            className="w-6 h-6 text-[var(--text-secondary)]"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M19 14l-7 7m0 0l-7-7m7 7V3"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </svg>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* Featured Projects Section */}
+      <section className="section bg-[var(--bg-primary)]">
+        <Container>
+          <div className="text-center mb-12">
+            <p className="eyebrow mb-2">Portfolio</p>
+            <h2 className="text-3xl md:text-4xl font-heading">Featured Projects</h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+            {featuredProjects.map((project) => (
+              <Link
+                key={project.id}
+                href={`/projects/${project.slug}`}
+                className="group"
+              >
+                <Card variant="default" padding="none" hoverable className="overflow-hidden">
+                  <CardImage
+                    aspectRatio="video"
+                    src={project.image}
+                    alt={project.title}
+                    className="group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="p-6">
+                    <p className="text-sm text-[var(--accent-primary)] mb-1">
+                      {project.tagline}
+                    </p>
+                    <CardTitle className="group-hover:text-[var(--accent-primary)] transition-colors">
+                      {project.title}
+                    </CardTitle>
+                    <CardDescription className="mt-2">
+                      {project.shortDescription}
+                    </CardDescription>
+                  </div>
+                </Card>
+              </Link>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Button variant="secondary" asChild>
+              <Link href="/gallery">View All Work</Link>
+            </Button>
+          </div>
+        </Container>
+      </section>
+
+      {/* About Preview Section */}
+      <section className="section bg-[var(--bg-secondary)]">
+        <Container>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <p className="eyebrow mb-2">About Me</p>
+              <h2 className="text-3xl md:text-4xl font-heading mb-6">
+                A Journey Through Art
+              </h2>
+              <p className="text-[var(--text-secondary)] mb-6 leading-relaxed">
+                I&apos;m a 3D animation student with a passion for bringing characters to life.
+                My work explores themes of South African culture, western aesthetics, and
+                the beauty found in everyday moments.
+              </p>
+              <p className="text-[var(--text-secondary)] mb-8 leading-relaxed">
+                From concept sketches to fully realized 3D characters, I approach each
+                project with dedication to craft and storytelling.
+              </p>
+              <Button variant="primary" asChild>
+                <Link href="/about">Learn More About Me</Link>
+              </Button>
+            </div>
+            <div className="relative">
+              <div className="aspect-[4/5] rounded-[var(--radius-lg)] overflow-hidden bg-[var(--bg-primary)]">
+                {/* Placeholder for about image */}
+                <div className="w-full h-full flex items-center justify-center text-[var(--text-secondary)]">
+                  <span>About Image</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* CTA Section */}
+      <section className="section bg-[var(--accent-primary)]">
+        <Container className="text-center">
+          <h2 className="text-3xl md:text-4xl font-heading text-white mb-6">
+            Let&apos;s Create Something Amazing
+          </h2>
+          <p className="text-white/80 max-w-2xl mx-auto mb-8">
+            Whether you have a project in mind or just want to say hello,
+            I&apos;d love to hear from you.
+          </p>
+          <Button variant="inverse" size="lg" asChild>
+            <Link href="/contact">Start a Conversation</Link>
+          </Button>
+        </Container>
+      </section>
+    </>
   );
 }

@@ -1,26 +1,442 @@
 @import "tailwindcss";
 
+/* ========================================
+   Design Tokens - Iwan Crafford Portfolio
+   Extracted from Webflow design system
+   ======================================== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Core Colors - Neutrals */
+  --neutral-primary: #2c2826;
+  --neutral-secondary: #141211;
+  --neutral-inverse: #e8dcd3;
+
+  /* Core Colors - Accents */
+  --accent-primary: #c76447;
+  --accent-primary-hover: #854634;
+  --accent-secondary: #6b9fa3;
+  --accent-secondary-hover: #3e5d5f;
+  --accent-tertiary: #8b6f47;
+  --accent-tertiary-hover: #55432a;
+
+  /* Link Colors */
+  --accent-link: #f25220;
+  --accent-link-hover: rgba(242, 82, 32, 0.6);
+  --accent-link-inverse: #f53b00;
+
+  /* Semantic Colors - Backgrounds */
+  --bg-primary: var(--neutral-primary);
+  --bg-secondary: var(--neutral-secondary);
+  --bg-inverse: var(--neutral-inverse);
+  --bg-accent-primary: var(--accent-primary);
+  --bg-accent-secondary: var(--accent-secondary);
+  --bg-accent-tertiary: var(--accent-tertiary);
+
+  /* Semantic Colors - Text */
+  --text-primary: var(--neutral-inverse);
+  --text-secondary: rgba(232, 220, 211, 0.6);
+  --text-inverse-primary: var(--neutral-primary);
+  --text-inverse-secondary: rgba(44, 40, 38, 0.6);
+  --text-on-accent: #ffffff;
+
+  /* Border Colors */
+  --border-primary: rgba(255, 255, 255, 0.1);
+  --border-secondary: rgba(255, 255, 255, 0.2);
+  --border-accent: var(--accent-primary);
+  --border-inverse-primary: rgba(4, 4, 6, 0.2);
+  --border-inverse-secondary: rgba(4, 4, 6, 0.1);
+
+  /* Typography - Font Families */
+  --font-heading: "Changa One", Impact, sans-serif;
+  --font-body: "Zilla Slab", serif;
+  --font-accent: "Outfit", sans-serif;
+
+  /* Typography - Font Sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.375rem;
+  --text-5xl: 4.21rem;
+  --text-6xl: 5.61rem;
+
+  /* Spacing Scale */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 0.75rem;
+  --spacing-lg: 1rem;
+  --spacing-xl: 1.25rem;
+  --spacing-2xl: 1.5rem;
+  --spacing-3xl: 2rem;
+  --spacing-4xl: 3rem;
+  --spacing-5xl: 4rem;
+  --spacing-6xl: 5rem;
+  --spacing-7xl: 6rem;
+  --spacing-8xl: 8rem;
+
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+  /* Transitions */
+  --ease-default: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --duration-fast: 150ms;
+  --duration-normal: 200ms;
+  --duration-slow: 300ms;
+
+  /* Container Widths */
+  --container-sm: 1000px;
+  --container-md: 1280px;
+  --container-lg: 1440px;
 }
 
+/* Tailwind v4 Theme Configuration */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Colors */
+  --color-neutral-primary: var(--neutral-primary);
+  --color-neutral-secondary: var(--neutral-secondary);
+  --color-neutral-inverse: var(--neutral-inverse);
+
+  --color-accent-primary: var(--accent-primary);
+  --color-accent-primary-hover: var(--accent-primary-hover);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-accent-secondary-hover: var(--accent-secondary-hover);
+  --color-accent-tertiary: var(--accent-tertiary);
+  --color-accent-tertiary-hover: var(--accent-tertiary-hover);
+
+  --color-accent-link: var(--accent-link);
+
+  /* Semantic Background Colors */
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-inverse: var(--bg-inverse);
+
+  /* Semantic Text Colors */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-inverse: var(--text-inverse-primary);
+
+  /* Font Families */
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+
+  /* Border Radius */
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-full: var(--radius-full);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ========================================
+   Base Styles
+   ======================================== */
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+h1 {
+  font-size: var(--text-5xl);
+  margin-bottom: 0.3em;
+}
+
+h2 {
+  font-size: var(--text-4xl);
+  margin-bottom: 0.35em;
+}
+
+h3 {
+  font-size: var(--text-3xl);
+  margin-bottom: 0.5em;
+}
+
+h4 {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  margin-bottom: 0.35em;
+}
+
+h5 {
+  font-size: var(--text-lg);
+  margin-bottom: 0.5em;
+}
+
+h6 {
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.5em;
+}
+
+/* Links */
+a {
+  color: var(--accent-link);
+  text-decoration: none;
+  transition: color var(--duration-normal) var(--ease-default);
+}
+
+a:hover {
+  color: var(--accent-link-hover);
+}
+
+/* Selection */
+::selection {
+  background-color: var(--accent-primary);
+  color: var(--text-on-accent);
+}
+
+/* Focus Styles */
+:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* ========================================
+   Utility Classes
+   ======================================== */
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: var(--container-md);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--spacing-lg);
+  padding-right: var(--spacing-lg);
+}
+
+.container-sm {
+  max-width: var(--container-sm);
+}
+
+.container-lg {
+  max-width: var(--container-lg);
+}
+
+/* Section Padding */
+.section {
+  padding-top: var(--spacing-8xl);
+  padding-bottom: var(--spacing-8xl);
+}
+
+/* Background Variants */
+.bg-primary { background-color: var(--bg-primary); }
+.bg-secondary { background-color: var(--bg-secondary); }
+.bg-inverse { background-color: var(--bg-inverse); color: var(--text-inverse-primary); }
+.bg-accent-primary { background-color: var(--bg-accent-primary); color: var(--text-on-accent); }
+.bg-accent-secondary { background-color: var(--bg-accent-secondary); color: var(--text-on-accent); }
+.bg-accent-tertiary { background-color: var(--bg-accent-tertiary); color: var(--text-on-accent); }
+
+/* Text Colors */
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-inverse { color: var(--text-inverse-primary); }
+.text-accent { color: var(--accent-primary); }
+
+/* Eyebrow / Label Text */
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* ========================================
+   Component Base Styles
+   ======================================== */
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1em 1.5em;
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-default);
+}
+
+.btn-primary {
+  background-color: var(--accent-primary);
+  color: var(--text-on-accent);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-primary-hover);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--accent-tertiary);
+  border-color: var(--border-secondary);
+}
+
+.btn-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-primary);
+}
+
+.btn-outline:hover {
+  border-color: var(--border-secondary);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Cards */
+.card {
+  padding: var(--spacing-4xl);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--radius-lg);
+  transition: all var(--duration-normal) var(--ease-default);
+}
+
+.card-inverse {
+  background-color: var(--bg-inverse);
+  color: var(--text-inverse-primary);
+  border-color: transparent;
+}
+
+.card-accent {
+  background-color: var(--accent-primary);
+  color: var(--text-on-accent);
+  border-color: transparent;
+}
+
+/* Form Inputs */
+.input {
+  width: 100%;
+  padding: var(--spacing-lg);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  transition: border-color var(--duration-normal) var(--ease-default);
+}
+
+.input::placeholder {
+  color: var(--text-secondary);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+}
+
+/* ========================================
+   Animation Classes
+   ======================================== */
+
+.animate-fade-in {
+  animation: fadeIn var(--duration-slow) var(--ease-default);
+}
+
+.animate-slide-up {
+  animation: slideUp var(--duration-slow) var(--ease-default);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   Responsive Breakpoints
+   ======================================== */
+
+@media (max-width: 991px) {
+  h1 {
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .section {
+    padding-top: var(--spacing-6xl);
+    padding-bottom: var(--spacing-6xl);
+  }
+}
+
+@media (max-width: 767px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+  }
+
+  .section {
+    padding-top: var(--spacing-5xl);
+    padding-bottom: var(--spacing-5xl);
+  }
+
+  .container {
+    padding-left: var(--spacing-lg);
+    padding-right: var(--spacing-lg);
+  }
 }
