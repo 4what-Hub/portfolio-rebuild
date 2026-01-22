@@ -13,14 +13,12 @@ const galleryItems = [
   { id: '2', title: 'Michael Picture', category: 'personal-work', image: '/images/Michael_Picture.jpg' },
   { id: '3', title: 'Matias Woord', category: 'finished-pieces', image: '/images/Matias_Woord.webp' },
   { id: '4', title: 'Wian Woord Final', category: 'character-art', image: '/images/Wian_WoordFinal.jpg' },
-  { id: '5', title: 'Tannie Ella Woord', category: 'character-art', image: '/images/Tannie_Ella_Woord.jpg' },
-  { id: '6', title: 'Sunette Doodle', category: 'sketches', image: '/images/Sunette_Doodle.jpg' },
-  { id: '7', title: 'Hansie Front', category: 'character-art', image: '/images/Hansie_Front.jpg' },
-  { id: '8', title: 'Johan Hagen Bust', category: 'character-art', image: '/images/Johan_Hagen_Bust.jpg' },
-  { id: '9', title: 'Whipshot Rifle', category: 'concept-art', image: '/images/Whipshot_Rifle.jpg' },
-  { id: '10', title: 'Lantern Presentation', category: 'finished-pieces', image: '/images/Lantern_Presentation.jpg' },
-  { id: '11', title: 'Coal Stove', category: 'finished-pieces', image: '/images/Coal_Stove_Presentation.jpg' },
-  { id: '12', title: 'Early Concept Exploration', category: 'concept-art', image: '/images/Early_Concept_Exploration.jpg' },
+  { id: '5', title: 'Sunette Doodle', category: 'sketches', image: '/images/Sunette_Doodle.jpg' },
+  { id: '6', title: 'Hansie Front', category: 'character-art', image: '/images/Hansie_Front_Render.png' },
+  { id: '7', title: 'Johan Hagen Bust', category: 'character-art', image: '/images/Johan_Hagen_Bust_Still-1.png' },
+  { id: '8', title: 'Lantern Presentation', category: 'finished-pieces', image: '/images/Lantern_Presentation_1_View.png' },
+  { id: '9', title: 'Coal Stove', category: 'finished-pieces', image: '/images/CoalStove_Presentation_V01_1.png' },
+  { id: '10', title: 'Early Concept Exploration', category: 'concept-art', image: '/images/Early_Concept_Exploration.jpg' },
 ];
 
 const categories = [
@@ -83,10 +81,13 @@ export default function GalleryPage() {
                 onClick={() => setSelectedImage(item)}
                 className="group relative aspect-square rounded-[var(--radius-lg)] overflow-hidden bg-[var(--bg-primary)] border border-[var(--border-primary)] hover:border-[var(--accent-primary)] transition-all duration-300"
               >
-                {/* Placeholder - replace with Next/Image when images are ready */}
-                <div className="absolute inset-0 flex items-center justify-center text-[var(--text-secondary)]">
-                  <span className="text-sm">{item.title}</span>
-                </div>
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                />
 
                 {/* Hover Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -129,15 +130,20 @@ export default function GalleryPage() {
             className="max-w-4xl max-h-[90vh] relative"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Placeholder for actual image */}
-            <div className="bg-[var(--bg-primary)] rounded-[var(--radius-lg)] p-8 text-center">
-              <div className="aspect-video bg-[var(--bg-secondary)] rounded-[var(--radius-md)] flex items-center justify-center mb-4">
-                <span className="text-[var(--text-secondary)]">{selectedImage.title}</span>
+            <div className="relative">
+              <Image
+                src={selectedImage.image}
+                alt={selectedImage.title}
+                width={1200}
+                height={800}
+                className="rounded-[var(--radius-lg)] max-h-[80vh] w-auto object-contain"
+              />
+              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent rounded-b-[var(--radius-lg)]">
+                <h3 className="text-white font-heading text-xl mb-1">{selectedImage.title}</h3>
+                <p className="text-white/70 capitalize">
+                  {selectedImage.category.replace('-', ' ')}
+                </p>
               </div>
-              <h3 className="text-white font-heading text-xl mb-2">{selectedImage.title}</h3>
-              <p className="text-[var(--text-secondary)] capitalize">
-                {selectedImage.category.replace('-', ' ')}
-              </p>
             </div>
           </div>
         </div>

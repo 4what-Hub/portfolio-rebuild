@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Container } from '@/components/layout';
 import { Button, Card, CardImage, CardTitle, CardDescription } from '@/components/ui';
 
@@ -10,7 +11,7 @@ const featuredProjects = [
     slug: 'frieda-en-rus',
     tagline: 'Saddle up for style.',
     shortDescription: 'A post-post apocalyptic wilderness. Welcome to the Wild West of the Nieu-Transvaal.',
-    image: '/images/frieda-hero.jpg',
+    image: '/images/Hansie_Front_Render.png',
   },
   {
     id: '2',
@@ -18,7 +19,7 @@ const featuredProjects = [
     slug: 'braai',
     tagline: 'A classic South African phrase.',
     shortDescription: 'Celebrating the rich cultural tradition of the South African braai.',
-    image: '/images/braai-hero.jpg',
+    image: '/images/CoalStove_Presentation_V01_1.png',
   },
   {
     id: '3',
@@ -26,7 +27,7 @@ const featuredProjects = [
     slug: 'professor',
     tagline: 'From concept to character.',
     shortDescription: 'A detailed character study of Dr. Johann Hagen.',
-    image: '/images/professor-hero.jpg',
+    image: '/images/Johan_Hagen_Bust_Still-1.png',
   },
   {
     id: '4',
@@ -34,7 +35,7 @@ const featuredProjects = [
     slug: 'unexpected-visitors',
     tagline: "If aliens ever did come to earth they'd come to SA first.",
     shortDescription: 'A sci-fi exploration of humanoid visitors in Cape Town.',
-    image: '/images/visitors-hero.jpg',
+    image: '/images/Early_Concept_Exploration.jpg',
   },
 ];
 
@@ -153,10 +154,13 @@ export default function HomePage() {
             </div>
             <div className="relative">
               <div className="aspect-[4/5] rounded-[var(--radius-lg)] overflow-hidden bg-[var(--bg-primary)]">
-                {/* Placeholder for about image */}
-                <div className="w-full h-full flex items-center justify-center text-[var(--text-secondary)]">
-                  <span>About Image</span>
-                </div>
+                <Image
+                  src="/images/For-Hano.jpg"
+                  alt="Iwan Crafford artwork"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
               </div>
             </div>
           </div>

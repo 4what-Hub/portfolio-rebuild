@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Container } from '@/components/layout';
@@ -29,11 +30,10 @@ The project began as a character study but evolved into a fully realized world w
 
 Every element, from the weathered textures of the characters' clothing to the harsh beauty of the landscape, was designed to tell a story of resilience and adaptation.`,
     category: 'animation',
-    heroImage: '/images/frieda-hero.jpg',
+    heroImage: '/images/Hansie_Front_Render.png',
     images: [
       { url: '/images/Early_Concept_Exploration.jpg', alt: 'Early concept exploration', type: 'concept' },
-      { url: '/images/Hansie_Front.jpg', alt: 'Hansie character front view', type: 'character' },
-      { url: '/images/Whipshot_Rifle.jpg', alt: 'Whipshot rifle design', type: 'prop' },
+      { url: '/images/Hansie_Front_Render.png', alt: 'Hansie character front view', type: 'character' },
     ],
     metadata: {
       technologies: ['Maya', 'ZBrush', 'Substance Painter', 'Arnold'],
@@ -50,10 +50,10 @@ Through character design and environmental storytelling, the project captures th
 
 The color palette draws from the warm oranges of flames, the deep browns of braaied meat, and the cool evening sky of a typical South African sunset.`,
     category: 'character-design',
-    heroImage: '/images/braai-hero.jpg',
+    heroImage: '/images/CoalStove_Presentation_V01_1.png',
     images: [
-      { url: '/images/Coal_Stove_Presentation.jpg', alt: 'Coal stove presentation', type: 'prop' },
-      { url: '/images/Lantern_Presentation.jpg', alt: 'Lantern presentation', type: 'prop' },
+      { url: '/images/CoalStove_Presentation_V01_1.png', alt: 'Coal stove presentation', type: 'prop' },
+      { url: '/images/Lantern_Presentation_1_View.png', alt: 'Lantern presentation', type: 'prop' },
     ],
     metadata: {
       technologies: ['Maya', 'Substance Painter', 'Photoshop'],
@@ -70,9 +70,9 @@ This project documents the complete journey from initial concept to final 3D cha
 
 The Professor embodies wisdom tempered by experience, his weathered features telling stories of countless experiments and discoveries. His design balances academic authority with approachable warmth.`,
     category: 'diorama',
-    heroImage: '/images/professor-hero.jpg',
+    heroImage: '/images/Johan_Hagen_Bust_Still-1.png',
     images: [
-      { url: '/images/Johan_Hagen_Bust.jpg', alt: 'Johan Hagen bust render', type: 'character' },
+      { url: '/images/Johan_Hagen_Bust_Still-1.png', alt: 'Johan Hagen bust render', type: 'character' },
     ],
     metadata: {
       technologies: ['ZBrush', 'Maya', 'Substance Painter', 'Arnold'],
@@ -89,8 +89,10 @@ The project imagines humanoid visitors arriving in Cape Town, their otherworldly
 
 This collaborative project brought together multiple artists to create a cohesive vision of this alternate reality, each contributing their unique perspective to the shared universe.`,
     category: 'collaborative',
-    heroImage: '/images/visitors-hero.jpg',
-    images: [],
+    heroImage: '/images/Early_Concept_Exploration.jpg',
+    images: [
+      { url: '/images/Early_Concept_Exploration.jpg', alt: 'Concept exploration', type: 'concept' },
+    ],
     metadata: {
       technologies: ['Maya', 'ZBrush', 'After Effects'],
       duration: '8 months',
@@ -151,7 +153,14 @@ export default async function ProjectPage({
     <>
       {/* Hero Section */}
       <section className="relative min-h-[70vh] flex items-end bg-[var(--bg-secondary)]">
-        {/* Background Image Placeholder */}
+        {/* Background Image */}
+        <Image
+          src={project.heroImage}
+          alt={project.title}
+          fill
+          className="object-cover"
+          priority
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-secondary)] via-[var(--bg-secondary)]/50 to-transparent" />
 
         <Container className="relative z-10 pb-16">
@@ -247,12 +256,15 @@ export default async function ProjectPage({
               {project.images.map((image, index) => (
                 <div
                   key={index}
-                  className="aspect-square rounded-[var(--radius-lg)] overflow-hidden bg-[var(--bg-primary)] border border-[var(--border-primary)]"
+                  className="relative aspect-square rounded-[var(--radius-lg)] overflow-hidden bg-[var(--bg-primary)] border border-[var(--border-primary)]"
                 >
-                  {/* Placeholder - replace with Next/Image */}
-                  <div className="w-full h-full flex items-center justify-center text-[var(--text-secondary)]">
-                    <span className="text-sm">{image.alt}</span>
-                  </div>
+                  <Image
+                    src={image.url}
+                    alt={image.alt}
+                    fill
+                    className="object-cover hover:scale-105 transition-transform duration-300"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
                 </div>
               ))}
             </div>

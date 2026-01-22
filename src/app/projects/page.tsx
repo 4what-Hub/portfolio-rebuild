@@ -17,7 +17,7 @@ const projects = [
     tagline: 'Saddle up for style.',
     shortDescription: 'A post-post apocalyptic wilderness. Welcome to the Wild West of the Nieu-Transvaal. Set in the barren wastelands of the post-post-apocalyptic Free State.',
     category: 'animation',
-    image: '/images/frieda-hero.jpg',
+    image: '/images/Hansie_Front_Render.png',
     featured: true,
   },
   {
@@ -27,7 +27,7 @@ const projects = [
     tagline: 'A classic South African phrase.',
     shortDescription: 'Celebrating the rich cultural tradition of the South African braai through character design and world-building.',
     category: 'character-design',
-    image: '/images/braai-hero.jpg',
+    image: '/images/CoalStove_Presentation_V01_1.png',
     featured: true,
   },
   {
@@ -37,7 +37,7 @@ const projects = [
     tagline: 'From concept to character.',
     shortDescription: 'A detailed character study of Dr. Johann Hagen, exploring the journey from initial concept sketches to fully realized 3D character.',
     category: 'diorama',
-    image: '/images/professor-hero.jpg',
+    image: '/images/Johan_Hagen_Bust_Still-1.png',
     featured: true,
   },
   {
@@ -47,7 +47,7 @@ const projects = [
     tagline: "If aliens ever did come to earth they'd come to SA first.",
     shortDescription: 'A sci-fi exploration of humanoid visitors arriving in Cape Town, blending South African culture with extraterrestrial intrigue.',
     category: 'collaborative',
-    image: '/images/visitors-hero.jpg',
+    image: '/images/Early_Concept_Exploration.jpg',
     featured: true,
   },
 ];
