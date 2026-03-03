@@ -53,3 +53,8 @@ functions/lib
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Screenshots and temp images
+Screenshot*.png
+Screenshot*.jpg
+*.screenshot.*
